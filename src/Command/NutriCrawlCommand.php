@@ -25,7 +25,7 @@ class NutriCrawlCommand extends Command
     {
         $this
             ->setName('app:nutri-crawl')
-            ->setDescription('Récupère les informations nutriments pour les aliments');
+            ->setDescription('RÃ©cupÃ¨re les informations nutriments pour les aliments');
     }
 
     /**
@@ -40,7 +40,6 @@ class NutriCrawlCommand extends Command
         $count = 0;
         $percent = 0;
 
-        $output->writeln(sprintf('0            -> %s', ini_get("memory_limit")));
         $listFood = $this->nutrientsService->getListFood();
 
         foreach ($listFood as $domFood) {
@@ -61,6 +60,6 @@ class NutriCrawlCommand extends Command
         }
 
         $this->foodManager->saveFood();
-        $output->writeln('Terminé...');
+        $output->writeln('TerminÃ©...');
     }
 }

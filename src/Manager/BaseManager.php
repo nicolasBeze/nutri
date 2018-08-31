@@ -15,7 +15,7 @@ abstract class BaseManager
      */
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em = $this;
+        $this->em = $em;
     }
 
     /**

@@ -43,6 +43,8 @@ class NutrientsService
         $food->setName($domFood->nodeValue);
 
         foreach ($crawlerDetail->filter('.details-valeurs > p') as $domElement) {
+            $e = $domElement->childNodes[3]->nodeValue;
+
             $food->addNutrient($this->nutrientValue($domElement));
         }
 
@@ -75,7 +77,7 @@ class NutrientsService
     {
         $nutrient = new Nutrient();
         $nutrient->setName($DOMElement->getElementsByTagName('dt')->item(0)->nodeValue);
-        $nutrient->setUnit($DOMElement->getElementsByTagName('dd')->item(0)->getElementsByTagName('span')->item(0)->nodeValue);
+        $this->implementValueAndUnit($nutrient, $DOMElement->getElementsByTagName('dd')->item(0)->getElementsByTagName('span')->item(0)->nodeValue);
 
         return $nutrient;
     }
@@ -89,7 +91,7 @@ class NutrientsService
     {
         $nutrient = new Nutrient();
         $nutrient->setName($DOMElement->childNodes[1]->nodeValue);
-        $nutrient->setUnit($DOMElement->childNodes[3]->nodeValue);
+        $this->implementValueAndUnit($nutrient, $DOMElement->childNodes[3]->nodeValue);
 
         return $nutrient;
     }
@@ -103,7 +105,22 @@ class NutrientsService
     {
         $nutrient = new Nutrient();
         $nutrient->setName($DOMElement->getElementsByTagName('span')->item(0)->nodeValue);
-        $nutrient->setUnit($DOMElement->getElementsByTagName('span')->item(1)->nodeValue);
+        $this->implementValueAndUnit($nutrient, $DOMElement->getElementsByTagName('span')->item(1)->nodeValue);
+
+        return $nutrient;
+    }
+
+    /**
+     * @param Nutrient $nutrient
+     * @param string   $string
+     *
+     * @return Nutrient
+     */
+    private function implementValueAndUnit(Nutrient $nutrient, string $string): Nutrient
+    {
+        $value = floatval($string);
+        $nutrient->setValue($value);
+        $nutrient->setUnit(trim(str_replace($value, '', $string)));
 
         return $nutrient;
     }
