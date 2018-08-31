@@ -30,12 +30,14 @@ class NutrientsService
      */
     public function generateFood(\DOMNode $domFood): Food
     {
+        $url = null;
         foreach ($domFood->attributes as $childNode) {
             $url = sprintf('%s%s', self::URL_CRAWL, $childNode->value);
         }
 
         $html = file_get_contents($url);
         $crawlerDetail = new Crawler($html);
+        unset($html);
 
         $food = new Food();
         $food->setName($domFood->nodeValue);
@@ -100,8 +102,8 @@ class NutrientsService
     private function nutrientBaseValue(\DOMElement $DOMElement): Nutrient
     {
         $nutrient = new Nutrient();
-        $nutrient->setName($DOMElement->getElementsByTagName('span')->item(0)->nodeValue;
-        $nutrient->setUnit($DOMElement->getElementsByTagName('span')->item(1)->nodeValue;
+        $nutrient->setName($DOMElement->getElementsByTagName('span')->item(0)->nodeValue);
+        $nutrient->setUnit($DOMElement->getElementsByTagName('span')->item(1)->nodeValue);
 
         return $nutrient;
     }

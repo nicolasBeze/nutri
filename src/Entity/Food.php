@@ -2,26 +2,42 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Class Food
+ * @ApiResource()
+ * @ORM\Entity()
+ * @package App\Entity
+ */
 class Food
 {
     /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
      */
     private $id;
 
     /**
+     * @ORM\Column
+     * @Assert\NotBlank
      * @var string
      */
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="NutrientBase", mappedBy="food", cascade={"persist"})
      * @var ArrayCollection|NutrientBase[]
      */
     private $nutrientBases;
 
     /**
+     * @ORM\OneToMany(targetEntity="Nutrient", mappedBy="food", cascade={"persist"})
      * @var ArrayCollection|Nutrient[]
      */
     private $nutrients;
@@ -63,7 +79,7 @@ class Food
     /**
      * @return NutrientBase[]|ArrayCollection
      */
-    public function getNutrientBases()
+    public function getNutrientBases(): ArrayCollection
     {
         return $this->nutrientBases;
     }
@@ -97,7 +113,7 @@ class Food
     /**
      * @return Nutrient[]|ArrayCollection
      */
-    public function getNutrients()
+    public function getNutrients(): ArrayCollection
     {
         return $this->nutrients;
     }

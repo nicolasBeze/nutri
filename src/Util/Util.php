@@ -4,7 +4,7 @@ namespace App\Util;
 
 class Util
 {
-    public static function getNutrientBase()
+    public static function getNutrientBase() : array
     {
         return [
             'proteines',
@@ -17,7 +17,7 @@ class Util
         ];
     }
 
-    public static Function getUnitNutrient()
+    public static Function getUnitNutrient() : array
     {
         return [
             'g',
