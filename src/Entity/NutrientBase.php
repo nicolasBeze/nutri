@@ -27,7 +27,7 @@ class NutrientBase
     private $id;
 
     /**
-     * @ORM\Column
+     * @ORM\Column(type="string", nullable=false)
      * @Assert\NotBlank
      * @Assert\Choice(callback={"Util", "getNutrientBase"})
      * @var string
@@ -97,6 +97,7 @@ class NutrientBase
     {
         if (!$this->nutrients->contains($nutrient)) {
             $this->nutrients->add($nutrient);
+            $nutrient->setNutrimentBase($this);
         }
 
         return $this;

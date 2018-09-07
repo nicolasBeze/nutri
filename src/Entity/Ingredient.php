@@ -3,18 +3,17 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Util\Util;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource()
  * @ORM\Entity()
- * Class Nutrient
+ * Class Ingredient
  *
  * @package App\Entity
  */
-class Nutrient
+class Ingredient
 {
     /**
      * @ORM\Column(type="integer")
@@ -25,13 +24,6 @@ class Nutrient
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank
-     * @var string
-     */
-    private $name;
-
-    /**
      * @ORM\Column(type="float", nullable=false)
      * @Assert\NotBlank
      * @var float
@@ -40,24 +32,18 @@ class Nutrient
 
     /**
      * @ORM\Column(type="string", nullable=false)
-     * @Assert\Choice(callback={"Util", "getUnitNutrient"})
+     * @Assert\Choice(callback={"Util", "getUnitIngredient"})
      * @Assert\NotBlank
      * @var string
      */
     private $unit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Food", inversedBy="nutrients")
+     * @ORM\ManyToOne(targetEntity="Nutrient")
      * @Assert\NotBlank
-     * @var Food
+     * @var Nutrient
      */
-    private $food;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="NutrientBase", inversedBy="nutrients")
-     * @var NutrientBase|null
-     */
-    private $nutrimentBase;
+    private $nutriment;
 
     /**
      * @return int
@@ -65,26 +51,6 @@ class Nutrient
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return Nutrient
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -98,7 +64,7 @@ class Nutrient
     /**
      * @param float $value
      *
-     * @return Nutrient
+     * @return Ingredient
      */
     public function setValue(float $value): self
     {
@@ -118,7 +84,7 @@ class Nutrient
     /**
      * @param string $unit
      *
-     * @return Nutrient
+     * @return Ingredient
      */
     public function setUnit(string $unit): self
     {
@@ -128,44 +94,23 @@ class Nutrient
     }
 
     /**
-     * @return Food
+     * @return Nutrient
      */
-    public function getFood(): Food
+    public function getNutriment(): Nutrient
     {
-        return $this->food;
+        return $this->nutriment;
     }
 
     /**
-     * @param Food $food
+     * @param $nutriment
      *
-     * @return Nutrient
+     * @return Ingredient
      */
-    public function setFood(Food $food): self
+    public function setNutriment($nutriment): self
     {
-        $this->food = $food;
+        $this->nutriment = $nutriment;
 
         return $this;
     }
-
-    /**
-     * @return NutrientBase|null
-     */
-    public function getNutrimentBase(): ?NutrientBase
-    {
-        return $this->nutrimentBase;
-    }
-
-    /**
-     * @param $nutrimentBase
-     *
-     * @return Nutrient
-     */
-    public function setNutrimentBase($nutrimentBase): self
-    {
-        $this->nutrimentBase = $nutrimentBase;
-
-        return $this;
-    }
-
 
 }

@@ -43,17 +43,15 @@ class NutrientsService
         $food->setName($domFood->nodeValue);
 
         foreach ($crawlerDetail->filter('.details-valeurs > p') as $domElement) {
-            $e = $domElement->childNodes[3]->nodeValue;
-
-            $food->addNutrient($this->nutrientValue($domElement));
+            $this->nutrientValue($food, $domElement);
         }
 
         foreach ($crawlerDetail->filter('.aliment-poids > dl') as $domElement) {
-            $food->addNutrient($this->nutrientWeightAndHealth($domElement));
+            $this->nutrientWeightAndHealth($food, $domElement);
         }
 
         foreach ($crawlerDetail->filter('.aliment-sante > dl') as $domElement) {
-            $food->addNutrient($this->nutrientWeightAndHealth($domElement));
+            $this->nutrientWeightAndHealth($food, $domElement);
         }
 
         foreach (Util::getNutrientBase() as $nutrientName) {
@@ -69,31 +67,70 @@ class NutrientsService
     }
 
     /**
+     * @param Food        $food
      * @param \DOMElement $DOMElement
      *
-     * @return Nutrient
+     * @return Food
      */
-    private function nutrientWeightAndHealth(\DOMElement $DOMElement): Nutrient
+    private function nutrientWeightAndHealth(Food $food,\DOMElement $DOMElement): Food
     {
-        $nutrient = new Nutrient();
-        $nutrient->setName($DOMElement->getElementsByTagName('dt')->item(0)->nodeValue);
-        $this->implementValueAndUnit($nutrient, $DOMElement->getElementsByTagName('dd')->item(0)->getElementsByTagName('span')->item(0)->nodeValue);
-
-        return $nutrient;
+        $value = floatval($DOMElement->getElementsByTagName('dd')->item(0)->getElementsByTagName('span')->item(0)->nodeValue);
+        switch (trim(str_replace("\t", '', $DOMElement->getElementsByTagName('dt')->item(0)->nodeValue))) {
+            case 'Index glycémique':
+                $food->setGlycemicIndex($value);
+                break;
+            case 'Indice de satiété':
+                $food->setSatietyIndex($value);
+                break;
+            case 'Densité calorique':
+                $food->setCaloricDensity($value);
+                break;
+            case 'Charge glycémique(portion de 100g)':
+                $food->setGlycemicCharge($value);
+                break;
+            case 'Indice de densité nutritionnelle':
+                $food->setNutritionalDensityIndex($value);
+                break;
+            case 'Score antioxydant':
+                $food->setAntioxidantScore($value);
+                break;
+            case 'Indice PRAL':
+                $food->setPRALIndex($value);
+                break;
+            case 'Ratio oméga-6 / oméga-3':
+                $food->setRatioOmega($value);
+                break;
+        }
+        return $food;
     }
 
     /**
+     * @param Food        $food
      * @param \DOMElement $DOMElement
      *
-     * @return Nutrient
+     * @return Food
      */
-    private function nutrientValue(\DOMElement $DOMElement): Nutrient
+    private function nutrientValue(Food $food, \DOMElement $DOMElement): Food
     {
-        $nutrient = new Nutrient();
-        $nutrient->setName($DOMElement->childNodes[1]->nodeValue);
-        $this->implementValueAndUnit($nutrient, $DOMElement->childNodes[3]->nodeValue);
-
-        return $nutrient;
+        $value = floatval($DOMElement->childNodes[3]->nodeValue);
+        switch (trim(str_replace("\t", '', $DOMElement->childNodes[1]->nodeValue))) {
+            case 'Protéines':
+                $food->setProtein($value);
+                    break;
+            case 'Lipides':
+                $food->setLipid($value);
+                break;
+            case 'Glucides':
+                $food->setGlucid($value);
+                break;
+            case 'Energie (kCal)':
+                $food->setEnergy($value);
+                break;
+            case 'Fibres':
+                $food->setFiber($value);
+                break;
+        }
+        return $food;
     }
 
     /**

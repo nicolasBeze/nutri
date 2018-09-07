@@ -22,9 +22,24 @@ class Util
         return [
             'g',
             'mg',
-            'µg',
+            'Âµg',
             'kJ',
             'kCal',
+        ];
+    }
+
+    public static Function getUnitIngredient() : array
+    {
+        return [
+            'kg',
+            'g',
+            'mg',
+            'l',
+            'cl',
+            'ml',
+            'tasse',
+            'cs.',
+            'cc.'
         ];
     }
 }

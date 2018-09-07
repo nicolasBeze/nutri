@@ -11,10 +11,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class Food
  * @ApiResource()
  * @ORM\Entity()
+ *
  * @package App\Entity
  */
 class Food
 {
+    use NutritionInformation, Allergens {
+        Allergens::__construct as private __aConstruct;
+    }
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -24,7 +29,7 @@ class Food
     private $id;
 
     /**
-     * @ORM\Column
+     * @ORM\Column(type="string", nullable=false)
      * @Assert\NotBlank
      * @var string
      */
@@ -46,6 +51,7 @@ class Food
     {
         $this->nutrientBases = new ArrayCollection();
         $this->nutrients = new ArrayCollection();
+        $this->__aConstruct();
     }
 
     /**
@@ -93,6 +99,7 @@ class Food
     {
         if (!$this->nutrientBases->contains($nutrientBase)) {
             $this->nutrientBases->add($nutrientBase);
+            $nutrientBase->setFood($this);
         }
 
         return $this;
@@ -127,6 +134,7 @@ class Food
     {
         if (!$this->nutrients->contains($nutrient)) {
             $this->nutrients->add($nutrient);
+            $nutrient->setFood($this);
         }
 
         return $this;
