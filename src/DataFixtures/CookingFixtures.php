@@ -15,9 +15,9 @@ class CookingFixtures extends Fixture
         foreach ($this->cookings as $c) {
             $cooking = new Cooking();
             $cooking->setValue($c);
-            $manager->persist($cooking);
+            //$manager->persist($cooking);
         }
 
-        $manager->flush();
+        //$manager->flush();
     }
 }
