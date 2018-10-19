@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class NutritionInformation
+class EcologicalImpact
 {
     /**
      * @ORM\Column(type="integer")
@@ -38,7 +38,7 @@ class NutritionInformation
     /**
      * @param string $name
      *
-     * @return NutritionInformation
+     * @return EcologicalImpact
      */
     public function setName(string $name): self
     {

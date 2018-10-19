@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Traits;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;

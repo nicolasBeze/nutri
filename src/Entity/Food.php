@@ -3,6 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Traits\Allergens;
+use App\Traits\FattyAcid;
+use App\Traits\Mineral;
+use App\Traits\NutritionIndex;
+use App\Traits\NutritionInformation;
+use App\Traits\Vitamin;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,10 +22,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Food
 {
-    use NutritionInformation, Allergens {
-        Allergens::__construct as private __aConstruct;
-    }
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -36,22 +38,33 @@ class Food
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="NutrientBase", mappedBy="food", cascade={"persist"})
-     * @var ArrayCollection|NutrientBase[]
+     * @ORM\ManyToOne(targetEntity="FoodCategory")
+     * @var ArrayCollection|FoodCategory[]
      */
-    private $nutrientBases;
+    private $foodCategory;
 
     /**
-     * @ORM\OneToMany(targetEntity="Nutrient", mappedBy="food", cascade={"persist"})
-     * @var ArrayCollection|Nutrient[]
+     * @ORM\ManyToOne(targetEntity="FoodAssociationCategory")
+     * @var ArrayCollection|FoodAssociationCategory[]
      */
-    private $nutrients;
+    private $foodAssociationCategory;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotBlank
+     * @var integer
+     */
+    private $ciqual_id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Allergen")
+     * @var Allergen
+     */
+    private $allergens;
 
     public function __construct()
     {
-        $this->nutrientBases = new ArrayCollection();
-        $this->nutrients = new ArrayCollection();
-        $this->__aConstruct();
+        $this->allergens = new ArrayCollection();
     }
 
     /**
@@ -83,71 +96,83 @@ class Food
     }
 
     /**
-     * @return NutrientBase[]|ArrayCollection
+     * @return FoodCategory[]|ArrayCollection
      */
-    public function getNutrientBases(): ArrayCollection
+    public function getFoodCategory()
     {
-        return $this->nutrientBases;
+        return $this->foodCategory;
     }
 
     /**
-     * @param NutrientBase $nutrientBase
+     * @param FoodCategory[]|ArrayCollection $foodCategory
+     */
+    public function setFoodCategory($foodCategory)
+    {
+        $this->foodCategory = $foodCategory;
+    }
+
+    /**
+     * @return FoodAssociationCategory[]|ArrayCollection
+     */
+    public function getFoodAssociationCategory()
+    {
+        return $this->foodAssociationCategory;
+    }
+
+    /**
+     * @param FoodAssociationCategory[]|ArrayCollection $foodAssociationCategory
+     */
+    public function setFoodAssociationCategory($foodAssociationCategory)
+    {
+        $this->foodAssociationCategory = $foodAssociationCategory;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCiqualId(): int
+    {
+        return $this->ciqual_id;
+    }
+
+    /**
+     * @param int $ciqual_id
+     */
+    public function setCiqualId(int $ciqual_id)
+    {
+        $this->ciqual_id = $ciqual_id;
+    }
+
+    /**
+     * @return Allergen[]|ArrayCollection
+     */
+    public function getAllergens(): ArrayCollection
+    {
+        return $this->allergens;
+    }
+
+    /**
+     * @param Allergen $allergen
      *
      * @return Food
      */
-    public function addNutrientBase(NutrientBase $nutrientBase): self
+    public function addAllergen(Allergen $allergen): self
     {
-        if (!$this->nutrientBases->contains($nutrientBase)) {
-            $this->nutrientBases->add($nutrientBase);
-            $nutrientBase->setFood($this);
+        if (!$this->allergens->contains($allergen)) {
+            $this->allergens->add($allergen);
         }
 
         return $this;
     }
 
     /**
-     * @param NutrientBase $nutrientBase
+     * @param Allergen $allergen
      *
      * @return Food
      */
-    public function removeNutrientBase(NutrientBase $nutrientBase): self
+    public function removeAllergen(Allergen $allergen): self
     {
-        $this->nutrientBases->removeElement($nutrientBase);
-
-        return $this;
-    }
-
-    /**
-     * @return Nutrient[]|ArrayCollection
-     */
-    public function getNutrients(): ArrayCollection
-    {
-        return $this->nutrients;
-    }
-
-    /**
-     * @param Nutrient $nutrient
-     *
-     * @return Food
-     */
-    public function addNutrient(Nutrient $nutrient): self
-    {
-        if (!$this->nutrients->contains($nutrient)) {
-            $this->nutrients->add($nutrient);
-            $nutrient->setFood($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Nutrient $nutrient
-     *
-     * @return Food
-     */
-    public function removeNutrient(Nutrient $nutrient): self
-    {
-        $this->nutrients->removeElement($nutrient);
+        $this->allergens->removeElement($allergen);
 
         return $this;
     }

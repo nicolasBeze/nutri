@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class NutritionInformation
+class FoodAssociationCategory
 {
     /**
      * @ORM\Column(type="integer")
@@ -38,12 +38,10 @@ class NutritionInformation
     /**
      * @param string $name
      *
-     * @return NutritionInformation
+     * @return FoodCategory
      */
-    public function setName(string $name): self
+    public function setName(string $name) :self
     {
         $this->name = $name;
-
-        return $this;
     }
 }

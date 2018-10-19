@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class NutritionInformation
+class Allergen
 {
     /**
      * @ORM\Column(type="integer")
@@ -38,7 +38,7 @@ class NutritionInformation
     /**
      * @param string $name
      *
-     * @return NutritionInformation
+     * @return Allergen
      */
     public function setName(string $name): self
     {
