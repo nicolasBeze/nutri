@@ -2,12 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\DataFixtures\Data\CarbonFootprint;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use App\Entity\CarbonFootprint as CarbonFP;
 
-class CarbonFootprintFixtures extends Fixture
+class CiqualFoodFixtures extends Fixture
 {
 
     public function load(ObjectManager $manager)

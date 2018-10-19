@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Recipe
 {
-    use Allergens, NutritionInformation;
+    use Allergen, NutritionInformation;
 
     /**
      * @ORM\Column(type="integer")

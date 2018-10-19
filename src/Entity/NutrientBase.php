@@ -47,6 +47,8 @@ class NutrientBase
      */
     private $food;
 
+
+
     public function __construct()
     {
         $this->nutrients = new ArrayCollection();
