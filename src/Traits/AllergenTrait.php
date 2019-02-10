@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @package App\Entity
  */
-trait Allergens
+trait AllergenTrait
 {
     /**
      * @ORM\Column(type="boolean", nullable=false)

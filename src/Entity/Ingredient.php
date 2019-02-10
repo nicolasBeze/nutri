@@ -39,11 +39,11 @@ class Ingredient
     private $unit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Nutrient")
+     * @ORM\ManyToOne(targetEntity="Food")
      * @Assert\NotBlank
-     * @var Nutrient
+     * @var Food
      */
-    private $nutriment;
+    private $food;
 
     /**
      * @return int
@@ -89,26 +89,6 @@ class Ingredient
     public function setUnit(string $unit): self
     {
         $this->unit = $unit;
-
-        return $this;
-    }
-
-    /**
-     * @return Nutrient
-     */
-    public function getNutriment(): Nutrient
-    {
-        return $this->nutriment;
-    }
-
-    /**
-     * @param $nutriment
-     *
-     * @return Ingredient
-     */
-    public function setNutriment($nutriment): self
-    {
-        $this->nutriment = $nutriment;
 
         return $this;
     }
