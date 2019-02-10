@@ -2,6 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\Recipe\Allergen;
+use App\Entity\Recipe\FattyAcid;
+use App\Entity\Recipe\Mineral;
+use App\Entity\Recipe\NutritionIndex;
+use App\Entity\Recipe\NutritionInformation;
+use App\Entity\Recipe\Seasonality;
+use App\Entity\Recipe\Vitamin;
 use Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +23,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Recipe
 {
-    use Allergen, NutritionInformation;
 
     /**
      * @ORM\Column(type="integer")
@@ -94,6 +100,13 @@ class Recipe
      * @Assert\NotBlank
      * @var integer
      */
+    private $maxCookingTemperature;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotBlank
+     * @var integer
+     */
     private $cookingTime;
 
     /**
@@ -101,6 +114,68 @@ class Recipe
      * @var ArrayCollection|RecipeStep[]
      */
     private $recipeSteps;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     * @var float|null
+     */
+    private $carbonFootprint;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     * @Assert\NotBlank
+     * @var boolean
+     */
+    private $industrial;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Allergen")
+     * @Assert\NotBlank
+     * @var Allergen
+     */
+    private $allergen;
+
+    /**
+     * @ORM\OneToOne(targetEntity="FattyAcid")
+     * @Assert\NotBlank
+     * @var FattyAcid
+     */
+    private $fattyAcid;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Mineral")
+     * @Assert\NotBlank
+     * @var Mineral
+     */
+    private $mineral;
+
+    /**
+     * @ORM\OneToOne(targetEntity="NutritionIndex")
+     * @Assert\NotBlank
+     * @var NutritionIndex
+     */
+    private $nutritionIndex;
+
+    /**
+     * @ORM\OneToOne(targetEntity="NutritionInformation")
+     * @Assert\NotBlank
+     * @var NutritionInformation
+     */
+    private $nutritionInformation;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Seasonality")
+     * @Assert\NotBlank
+     * @var Seasonality
+     */
+    private $seasonality;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Vitamin")
+     * @Assert\NotBlank
+     * @var Vitamin
+     */
+    private $vitamin;
 
     public function __construct()
     {

@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait NutritionIndex
+trait NutritionIndexTrait
 {
     private $glycemicIndex;
     /**

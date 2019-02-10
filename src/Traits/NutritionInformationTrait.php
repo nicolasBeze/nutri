@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @package App\Entity
  */
-trait NutritionInformation
+trait NutritionInformationTrait
 {
     /**
      * @ORM\Column(type="float", nullable=true)
