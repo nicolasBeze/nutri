@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Entity\Food\Allergen;
-use App\Entity\Food\FattyAcid;
-use App\Entity\Food\Mineral;
-use App\Entity\Food\NutritionIndex;
-use App\Entity\Food\NutritionInformation;
-use App\Entity\Food\Seasonality;
-use App\Entity\Food\Vitamin;
+use App\Entity\FoodEntity\Allergen;
+use App\Entity\FoodEntity\FattyAcid;
+use App\Entity\FoodEntity\Mineral;
+use App\Entity\FoodEntity\NutritionIndex;
+use App\Entity\FoodEntity\NutritionInformation;
+use App\Entity\FoodEntity\Seasonality;
+use App\Entity\FoodEntity\Vitamin;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,49 +71,49 @@ class Food
     private $industrial;
 
     /**
-     * @ORM\OneToOne(targetEntity="Allergen")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Allergen")
      * @Assert\NotBlank
      * @var Allergen
      */
     private $allergen;
 
     /**
-     * @ORM\OneToOne(targetEntity="FattyAcid")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\FattyAcid")
      * @Assert\NotBlank
      * @var FattyAcid
      */
     private $fattyAcid;
 
     /**
-     * @ORM\OneToOne(targetEntity="Mineral")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Mineral")
      * @Assert\NotBlank
      * @var Mineral
      */
     private $mineral;
 
     /**
-     * @ORM\OneToOne(targetEntity="NutritionIndex")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\NutritionIndex")
      * @Assert\NotBlank
      * @var NutritionIndex
      */
     private $nutritionIndex;
 
     /**
-     * @ORM\OneToOne(targetEntity="NutritionInformation")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\NutritionInformation")
      * @Assert\NotBlank
      * @var NutritionInformation
      */
     private $nutritionInformation;
 
     /**
-     * @ORM\OneToOne(targetEntity="Seasonality")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Seasonality")
      * @Assert\NotBlank
      * @var Seasonality
      */
     private $seasonality;
 
     /**
-     * @ORM\OneToOne(targetEntity="Vitamin")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Vitamin")
      * @Assert\NotBlank
      * @var Vitamin
      */

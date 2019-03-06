@@ -1,0 +1,39 @@
+version: '3.5'
+
+networks:
+    default:
+        name: nutri
+services:
+    front:
+        image: nginx:1.14
+        labels:
+            - "traefik.frontend.rule=Host:local.nutri.com"
+        volumes:
+            - ".:/var/www/html:ro"
+            - "./docker/front/default.conf:/etc/nginx/conf.d/default.conf:ro"
+    app:
+        build: ./docker/app/dev/
+        environment:
+            SYMFONY_ENV: dev
+        volumes:
+            - ".:/home/docker:rw"
+            - "./docker/app/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro"
+        working_dir: "/home/docker"
+
+    db:
+        container_name: nutri-mysql
+        image: mysql:8.0.0
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: nutri
+            MYSQL_USER: nutri
+            MYSQL_PASSWORD: nutri
+
+    phpmyadmin:
+        ports:
+            - "81:80"
+        links:
+            - db:db
+        image: phpmyadmin/phpmyadmin
