@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-trait SeasonalityTrait
+trait SeasonTrait
 {
     /**
      * @ORM\Column(type="boolean", nullable=false)
@@ -33,7 +33,7 @@ trait SeasonalityTrait
     private $april;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="float", nullable=false)
      * @var float|null
      */
     private $may;
@@ -104,17 +104,17 @@ trait SeasonalityTrait
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getJanuary()
+    public function isJanuary(): bool
     {
         return $this->january;
     }
 
     /**
-     * @param mixed $january
+     * @param bool $january
      */
-    public function setJanuary($january)
+    public function setJanuary(bool $january)
     {
         $this->january = $january;
     }

@@ -3,10 +3,8 @@
 namespace App\Entity\FoodEntity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Entity\Food;
 use Doctrine\ORM\Mapping as ORM;
 use App\Traits\NutritionInformationTrait;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class NutritionInformation
@@ -29,37 +27,10 @@ class NutritionInformation
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Food")
-     * @Assert\NotBlank
-     * @var Food
-     */
-    private $food;
-
-    /**
      * @return int
      */
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Food
-     */
-    public function getFood(): Food
-    {
-        return $this->food;
-    }
-
-    /**
-     * @param Food $food
-     *
-     * @return NutritionInformation
-     */
-    public function setFood(Food $food): self
-    {
-        $this->food = $food;
-
-        return $this;
     }
 }

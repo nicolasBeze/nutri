@@ -25,19 +25,26 @@ class FoodManager extends BaseManager
     /**
      * @param Food $food
      */
-    public function persistFood(Food $food): void
+    public function persist(Food $food): void
     {
-        $this->persist($food);
+        $this->em->persist($food);
     }
 
     /**
      * @param Food|null $food
      */
-    public function saveFood(Food $food = null): void
+    public function save(Food $food = null): void
     {
         if ($food) {
             $this->persistAndFlush($food);
         }
         $this->flush();
+    }
+
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectRepository
+     */
+    public function getRepository() {
+        return $this->em->getRepository(Food::class);
     }
 }

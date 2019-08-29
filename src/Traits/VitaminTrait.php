@@ -78,7 +78,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getRetinol()
+    public function getRetinol(): ?float
     {
         return $this->retinol;
     }
@@ -86,7 +86,7 @@ trait VitaminTrait
     /**
      * @param float|null $retinol
      */
-    public function setRetinol($retinol)
+    public function setRetinol(?float $retinol)
     {
         $this->retinol = $retinol;
     }
@@ -94,7 +94,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getBetaCarotene()
+    public function getBetaCarotene(): ?float
     {
         return $this->betaCarotene;
     }
@@ -102,7 +102,7 @@ trait VitaminTrait
     /**
      * @param float|null $betaCarotene
      */
-    public function setBetaCarotene($betaCarotene)
+    public function setBetaCarotene(?float $betaCarotene)
     {
         $this->betaCarotene = $betaCarotene;
     }
@@ -110,7 +110,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminD()
+    public function getVitaminD(): ?float
     {
         return $this->vitaminD;
     }
@@ -118,7 +118,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminD
      */
-    public function setVitaminD($vitaminD)
+    public function setVitaminD(?float $vitaminD)
     {
         $this->vitaminD = $vitaminD;
     }
@@ -126,7 +126,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminE()
+    public function getVitaminE(): ?float
     {
         return $this->vitaminE;
     }
@@ -134,7 +134,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminE
      */
-    public function setVitaminE($vitaminE)
+    public function setVitaminE(?float $vitaminE)
     {
         $this->vitaminE = $vitaminE;
     }
@@ -142,7 +142,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminK1()
+    public function getVitaminK1(): ?float
     {
         return $this->vitaminK1;
     }
@@ -150,7 +150,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminK1
      */
-    public function setVitaminK1($vitaminK1)
+    public function setVitaminK1(?float $vitaminK1)
     {
         $this->vitaminK1 = $vitaminK1;
     }
@@ -158,7 +158,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminK2()
+    public function getVitaminK2(): ?float
     {
         return $this->vitaminK2;
     }
@@ -166,7 +166,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminK2
      */
-    public function setVitaminK2($vitaminK2)
+    public function setVitaminK2(?float $vitaminK2)
     {
         $this->vitaminK2 = $vitaminK2;
     }
@@ -174,7 +174,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminC()
+    public function getVitaminC(): ?float
     {
         return $this->vitaminC;
     }
@@ -182,7 +182,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminC
      */
-    public function setVitaminC($vitaminC)
+    public function setVitaminC(?float $vitaminC)
     {
         $this->vitaminC = $vitaminC;
     }
@@ -190,7 +190,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminB1()
+    public function getVitaminB1(): ?float
     {
         return $this->vitaminB1;
     }
@@ -198,7 +198,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminB1
      */
-    public function setVitaminB1($vitaminB1)
+    public function setVitaminB1(?float $vitaminB1)
     {
         $this->vitaminB1 = $vitaminB1;
     }
@@ -206,7 +206,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminB2()
+    public function getVitaminB2(): ?float
     {
         return $this->vitaminB2;
     }
@@ -214,7 +214,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminB2
      */
-    public function setVitaminB2($vitaminB2)
+    public function setVitaminB2(?float $vitaminB2)
     {
         $this->vitaminB2 = $vitaminB2;
     }
@@ -222,7 +222,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminB3()
+    public function getVitaminB3(): ?float
     {
         return $this->vitaminB3;
     }
@@ -230,7 +230,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminB3
      */
-    public function setVitaminB3($vitaminB3)
+    public function setVitaminB3(?float $vitaminB3)
     {
         $this->vitaminB3 = $vitaminB3;
     }
@@ -238,7 +238,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminB5()
+    public function getVitaminB5(): ?float
     {
         return $this->vitaminB5;
     }
@@ -246,7 +246,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminB5
      */
-    public function setVitaminB5($vitaminB5)
+    public function setVitaminB5(?float $vitaminB5)
     {
         $this->vitaminB5 = $vitaminB5;
     }
@@ -254,7 +254,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminB6()
+    public function getVitaminB6(): ?float
     {
         return $this->vitaminB6;
     }
@@ -262,7 +262,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminB6
      */
-    public function setVitaminB6($vitaminB6)
+    public function setVitaminB6(?float $vitaminB6)
     {
         $this->vitaminB6 = $vitaminB6;
     }
@@ -270,7 +270,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminB9()
+    public function getVitaminB9(): ?float
     {
         return $this->vitaminB9;
     }
@@ -278,7 +278,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminB9
      */
-    public function setVitaminB9($vitaminB9)
+    public function setVitaminB9(?float $vitaminB9)
     {
         $this->vitaminB9 = $vitaminB9;
     }
@@ -286,7 +286,7 @@ trait VitaminTrait
     /**
      * @return float|null
      */
-    public function getVitaminB12()
+    public function getVitaminB12(): ?float
     {
         return $this->vitaminB12;
     }
@@ -294,7 +294,7 @@ trait VitaminTrait
     /**
      * @param float|null $vitaminB12
      */
-    public function setVitaminB12($vitaminB12)
+    public function setVitaminB12(?float $vitaminB12)
     {
         $this->vitaminB12 = $vitaminB12;
     }

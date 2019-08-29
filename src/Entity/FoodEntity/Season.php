@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Entity\RecipeEntity;
+namespace App\Entity\FoodEntity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Validator\Constraints as Assert;
-use App\Entity\Recipe;
+use App\Entity\Food;
 use Doctrine\ORM\Mapping as ORM;
-use App\Traits\NutritionIndexTrait;
+use App\Traits\SeasonTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class NutritionIndex
- *
+ * Class Season
  * @ApiResource()
  * @ORM\Entity()
- * @ORM\Table(name="recipe_nutrition_index")
- * @package App\Entity\RecipeEntity
+ * @ORM\Table(name="food_season")
+ *
+ * @package App\Entity\FoodEntity
  */
-class NutritionIndex
+class Season
 {
-    use NutritionIndexTrait;
+    use SeasonTrait;
 
     /**
      * @ORM\Column(type="integer")

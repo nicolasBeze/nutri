@@ -2,16 +2,6 @@
 
 namespace App\Traits;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ApiResource()
- * @ORM\Entity()
- * Class NutritionInformation
- *
- * @package App\Entity
- */
 trait NutritionInformationTrait
 {
     /**
@@ -38,7 +28,7 @@ trait NutritionInformationTrait
      * @ORM\Column(type="float", nullable=true)
      * @var float|null
      */
-    private $eau;
+    private $water;
     /**
      * @ORM\Column(type="float", nullable=true)
      * @var float|null
@@ -161,17 +151,17 @@ trait NutritionInformationTrait
     /**
      * @return float|null
      */
-    public function getEau()
+    public function getWater()
     {
-        return $this->eau;
+        return $this->water;
     }
 
     /**
-     * @param float|null $eau
+     * @param float|null $water
      */
-    public function setEau($eau)
+    public function setWater($water)
     {
-        $this->eau = $eau;
+        $this->water = $water;
     }
 
     /**

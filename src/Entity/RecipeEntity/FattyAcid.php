@@ -30,36 +30,10 @@ class FattyAcid
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Recipe")
-     * @Assert\NotBlank
-     * @var Recipe
-     */
-    private $recipe;
-
-    /**
      * @return int
      */
     public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Recipe
-     */
-    public function getRecipe(): Recipe
-    {
-        return $this->recipe;
-    }
-
-    /**
-     * @param Recipe $recipe
-     *
-     * @return FattyAcid
-     */
-    public function setRecipe(Recipe $recipe): self
-    {
-        $this->recipe = $recipe;
-        return $this;
     }
 }

@@ -4,6 +4,11 @@ namespace App\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Class BaseManager
+ *
+ * @package App\Manager
+ */
 abstract class BaseManager
 {
     protected $em;
@@ -24,15 +29,7 @@ abstract class BaseManager
     protected function persistAndFlush($entity): void
     {
         $this->em->persist($entity);
-        $this->em->flush();
-    }
-
-    /**
-     * @param $entity
-     */
-    public function persist($entity): void
-    {
-        $this->em->persist($entity);
+        $this->flush();
     }
 
     protected function flush(): void

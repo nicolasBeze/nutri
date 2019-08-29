@@ -8,7 +8,7 @@ use App\Entity\FoodEntity\FattyAcid;
 use App\Entity\FoodEntity\Mineral;
 use App\Entity\FoodEntity\NutritionIndex;
 use App\Entity\FoodEntity\NutritionInformation;
-use App\Entity\FoodEntity\Seasonality;
+use App\Entity\FoodEntity\Season;
 use App\Entity\FoodEntity\Vitamin;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -39,23 +39,23 @@ class Food
     private $name;
 
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotBlank
+     * @var integer
+     */
+    private $ciqualId;
+
+    /**
      * @ORM\ManyToOne(targetEntity="FoodCategory")
-     * @var ArrayCollection|FoodCategory[]
+     * @var FoodCategory|null
      */
     private $foodCategory;
 
     /**
      * @ORM\ManyToOne(targetEntity="FoodAssociationCategory")
-     * @var ArrayCollection|FoodAssociationCategory[]
+     * @var FoodAssociationCategory
      */
     private $foodAssociationCategory;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @Assert\NotBlank
-     * @var integer
-     */
-    private $ciqual_id;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -64,56 +64,63 @@ class Food
     private $carbonFootprint;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=true)
      * @Assert\NotBlank
      * @var boolean
      */
     private $industrial;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Allergen")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Allergen", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var Allergen
      */
     private $allergen;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\FattyAcid")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\FattyAcid", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var FattyAcid
      */
     private $fattyAcid;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Mineral")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Mineral", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var Mineral
      */
     private $mineral;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\NutritionIndex")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\NutritionIndex", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var NutritionIndex
      */
     private $nutritionIndex;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\NutritionInformation")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\NutritionInformation", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var NutritionInformation
      */
     private $nutritionInformation;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Seasonality")
+     * @ORM\Column(type="boolean", nullable=true)
      * @Assert\NotBlank
-     * @var Seasonality
+     * @var boolean
      */
     private $seasonality;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Vitamin")
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Season", cascade={"persist", "remove"})
+     * @Assert\NotBlank
+     * @var Season
+     */
+    private $season;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\FoodEntity\Vitamin", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var Vitamin
      */
@@ -148,40 +155,42 @@ class Food
     }
 
     /**
-     * @return FoodCategory[]|ArrayCollection
+     * @return FoodCategory
      */
-    public function getFoodCategory()
+    public function getFoodCategory(): ?FoodCategory
     {
         return $this->foodCategory;
     }
 
     /**
-     * @param $foodCategory
+     * @param FoodCategory $foodCategory
      *
      * @return Food
      */
-    public function setFoodCategory($foodCategory): self
+    public function setFoodCategory(?FoodCategory $foodCategory): self
     {
         $this->foodCategory = $foodCategory;
+
         return $this;
     }
 
     /**
-     * @return FoodAssociationCategory[]|ArrayCollection
+     * @return mixed
      */
-    public function getFoodAssociationCategory()
+    public function getFoodAssociationCategory(): ?FoodAssociationCategory
     {
         return $this->foodAssociationCategory;
     }
 
     /**
-     * @param $foodAssociationCategory
+     * @param FoodAssociationCategory|null $foodAssociationCategory
      *
      * @return Food
      */
-    public function setFoodAssociationCategory($foodAssociationCategory): self
+    public function setFoodAssociationCategory(?FoodAssociationCategory $foodAssociationCategory): self
     {
         $this->foodAssociationCategory = $foodAssociationCategory;
+
         return $this;
     }
 
@@ -190,17 +199,18 @@ class Food
      */
     public function getCiqualId(): int
     {
-        return $this->ciqual_id;
+        return $this->ciqualId;
     }
 
     /**
-     * @param int $ciqual_id
+     * @param int $ciqualId
      *
      * @return Food
      */
-    public function setCiqualId(int $ciqual_id): self
+    public function setCiqualId(int $ciqualId): self
     {
-        $this->ciqual_id = $ciqual_id;
+        $this->ciqualId = $ciqualId;
+
         return $this;
     }
 
@@ -220,6 +230,7 @@ class Food
     public function setCarbonFootprint($carbonFootprint): self
     {
         $this->carbonFootprint = $carbonFootprint;
+
         return $this;
     }
 
@@ -233,16 +244,20 @@ class Food
 
     /**
      * @param bool $industrial
+     *
+     * @return Food
      */
-    public function setIndustrial(bool $industrial)
+    public function setIndustrial(bool $industrial): self
     {
         $this->industrial = $industrial;
+
+        return $this;
     }
 
     /**
      * @return Allergen
      */
-    public function getAllergen(): Allergen
+    public function getAllergen(): ?Allergen
     {
         return $this->allergen;
     }
@@ -255,13 +270,14 @@ class Food
     public function setAllergen(Allergen $allergen): self
     {
         $this->allergen = $allergen;
+
         return $this;
     }
 
     /**
      * @return FattyAcid
      */
-    public function getFattyAcid(): FattyAcid
+    public function getFattyAcid(): ?FattyAcid
     {
         return $this->fattyAcid;
     }
@@ -274,13 +290,14 @@ class Food
     public function setFattyAcid(FattyAcid $fattyAcid): self
     {
         $this->fattyAcid = $fattyAcid;
+
         return $this;
     }
 
     /**
      * @return Mineral
      */
-    public function getMineral(): Mineral
+    public function getMineral(): ?Mineral
     {
         return $this->mineral;
     }
@@ -293,13 +310,14 @@ class Food
     public function setMineral(Mineral $mineral): self
     {
         $this->mineral = $mineral;
+
         return $this;
     }
 
     /**
      * @return NutritionIndex
      */
-    public function getNutritionIndex(): NutritionIndex
+    public function getNutritionIndex(): ?NutritionIndex
     {
         return $this->nutritionIndex;
     }
@@ -312,13 +330,14 @@ class Food
     public function setNutritionIndex(NutritionIndex $nutritionIndex): self
     {
         $this->nutritionIndex = $nutritionIndex;
+
         return $this;
     }
 
     /**
      * @return NutritionInformation
      */
-    public function getNutritionInformation(): NutritionInformation
+    public function getNutritionInformation(): ?NutritionInformation
     {
         return $this->nutritionInformation;
     }
@@ -331,32 +350,54 @@ class Food
     public function setNutritionInformation(NutritionInformation $nutritionInformation): self
     {
         $this->nutritionInformation = $nutritionInformation;
+
         return $this;
     }
 
     /**
-     * @return Seasonality
+     * @return bool
      */
-    public function getSeasonality(): Seasonality
+    public function isSeasonality(): bool
     {
         return $this->seasonality;
     }
 
     /**
-     * @param Seasonality $seasonality
+     * @param bool $seasonality
      *
      * @return Food
      */
-    public function setSeasonality(Seasonality $seasonality): self
+    public function setSeasonality(bool $seasonality): self
     {
         $this->seasonality = $seasonality;
+
+        return $this;
+    }
+
+    /**
+     * @return Season
+     */
+    public function getSeason(): ?Season
+    {
+        return $this->season;
+    }
+
+    /**
+     * @param Season $season
+     *
+     * @return Food
+     */
+    public function setSeason(Season $season): self
+    {
+        $this->season = $season;
+
         return $this;
     }
 
     /**
      * @return Vitamin
      */
-    public function getVitamin(): Vitamin
+    public function getVitamin(): ?Vitamin
     {
         return $this->vitamin;
     }
@@ -369,6 +410,29 @@ class Food
     public function setVitamin(Vitamin $vitamin): self
     {
         $this->vitamin = $vitamin;
+
         return $this;
+    }
+
+    public function __get($prop)
+    {
+        return $this->$prop;
+    }
+
+    public function __isset($prop): bool
+    {
+        return isset($this->$prop);
+    }
+
+    /**
+     * @param ArrayCollection $collection
+     * @param int             $ciqualId
+     *
+     * @return Food|bool
+     */
+    static function findByCiqualId(ArrayCollection $collection, int $ciqualId) {
+        return $collection->filter(function(Food $food) use ($ciqualId) {
+            return $food->getCiqualId() === $ciqualId;
+        })->first();
     }
 }

@@ -7,7 +7,7 @@ use App\Entity\RecipeEntity\FattyAcid;
 use App\Entity\RecipeEntity\Mineral;
 use App\Entity\RecipeEntity\NutritionIndex;
 use App\Entity\RecipeEntity\NutritionInformation;
-use App\Entity\RecipeEntity\Seasonality;
+use App\Entity\RecipeEntity\Season;
 use App\Entity\RecipeEntity\Vitamin;
 use Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -129,49 +129,49 @@ class Recipe
     private $industrial;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Allergen")
+     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Allergen", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var Allergen
      */
     private $allergen;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\FattyAcid")
+     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\FattyAcid", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var FattyAcid
      */
     private $fattyAcid;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Mineral")
+     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Mineral", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var Mineral
      */
     private $mineral;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\NutritionIndex")
+     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\NutritionIndex", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var NutritionIndex
      */
     private $nutritionIndex;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\NutritionInformation")
+     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\NutritionInformation", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var NutritionInformation
      */
     private $nutritionInformation;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Seasonality")
+     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Season", cascade={"persist", "remove"})
      * @Assert\NotBlank
-     * @var Seasonality
+     * @var Season
      */
-    private $seasonality;
+    private $season;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Vitamin")
+     * @ORM\OneToOne(targetEntity="App\Entity\RecipeEntity\Vitamin", cascade={"persist", "remove"})
      * @Assert\NotBlank
      * @var Vitamin
      */

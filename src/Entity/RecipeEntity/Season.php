@@ -6,19 +6,19 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Recipe;
 use Doctrine\ORM\Mapping as ORM;
-use App\Traits\NutritionIndexTrait;
+use App\Traits\SeasonTrait;
 
 /**
- * Class NutritionIndex
+ * Class Season
  *
  * @ApiResource()
  * @ORM\Entity()
- * @ORM\Table(name="recipe_nutrition_index")
+ * @ORM\Table(name="recipe_season")
  * @package App\Entity\RecipeEntity
  */
-class NutritionIndex
+class Season
 {
-    use NutritionIndexTrait;
+    use SeasonTrait;
 
     /**
      * @ORM\Column(type="integer")

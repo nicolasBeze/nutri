@@ -2,17 +2,6 @@
 
 namespace App\Traits;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ApiResource()
- * @ORM\Entity()
- * Class Allergens
- *
- * @package App\Entity
- */
 trait AllergenTrait
 {
     /**
